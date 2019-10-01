@@ -1,4 +1,4 @@
-sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -s -1 -2
+#sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -s -1 -2
 sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d met_correction -u -p ChannelOnZ__MET -n 45 -x \"MET [GeV]\" -y -r 0.01,1e7
 sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d met_correction -u -p ChannelOnZ__OrigMET -n 45 -x \"MET w/ no smear [GeV]\" -y -r 0.01,1e7
 sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d signal_discriminant -p ChannelEMu__MTNom0 -n 15 -x \"#it{m}_{T}^{l1} [GeV]\"
@@ -26,11 +26,14 @@ sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d zpeak -p Cut4LepLeptonPt__MllNomZoo
 sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d twzcr -p ChannelBTagEMuOneNb__Njet  -u -x \"#it{n}_{jet}\"
 sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d wzar -p ChannelAREMuHighMT__lepFrelIso03EA  -u -x \"I_{rel,0.3,EA,e}\" -n 5
 sh runall.sh -b mtsum -t WVZ -v v0.1.12.7 -d wzar -p ChannelAREMuHighMT__lepFrelIso04DB  -u -x \"I_{rel,0.4,DB,#mu}\" -n 5
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeMu__lepFakeCand2relIso04DB -u -y -x \"I_{rel,0.4,DB,#mu}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeEl__lepFakeCand2relIso03EA -u -y -x \"I_{rel,0.3,EA,e}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeMu__lepFakeCand2PtReg -u -x \"#it{p}_{T,#mu}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeEl__lepFakeCand2PtReg -u -x \"#it{p}_{T,e}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeMu__lepFakeCand2relIso04DB -u -y -x \"I_{rel,0.4,DB,#mu}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeEl__lepFakeCand2relIso03EA -u -y -x \"I_{rel,0.3,EA,e}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeMu__lepFakeCand2PtReg -u -x \"#it{p}_{T,#mu}\"
-sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeEl__lepFakeCand2PtReg -u -x \"#it{p}_{T,e}\"
+
+
+
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeMu__lepFakeCand2relIso04DB -u -y -x \"I_{rel,0.4,DB,#mu}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeEl__lepFakeCand2relIso03EA -u -y -x \"I_{rel,0.3,EA,e}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeMu__lepFakeCand2PtReg -u -x \"#it{p}_{T,#mu}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p DYPlusXFakeEl__lepFakeCand2PtReg -u -x \"#it{p}_{T,e}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeMu__lepFakeCand2relIso04DB -u -y -x \"I_{rel,0.4,DB,#mu}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeEl__lepFakeCand2relIso03EA -u -y -x \"I_{rel,0.3,EA,e}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeMu__lepFakeCand2PtReg -u -x \"#it{p}_{T,#mu}\"
+#sh runall.sh -b test -t Trilep -v v0.1.11 -d wzvr -p EMuPlusXFakeEl__lepFakeCand2PtReg -u -x \"#it{p}_{T,e}\"

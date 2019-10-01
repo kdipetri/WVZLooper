@@ -91,9 +91,11 @@ def main_analysis_make_plot_userfilter():
             # "outputs/{}/{}/zzz.root".format(ntuple_version, tag),
             "outputs/{}/{}/sig.root".format(ntuple_version, tag),
             ]
+    #KARRI ggZH tmp 
     sigfiles_detail = [
             "outputs/{}/{}/nonh_wwz.root".format(ntuple_version, tag),
             "outputs/{}/{}/zh_wwz.root".format(ntuple_version, tag),
+	    "outputs/{}/{}/ggzh_wwz.root".format(ntuple_version, tag),
             "outputs/{}/{}/nonh_wzz.root".format(ntuple_version, tag),
             "outputs/{}/{}/wh_wzz.root".format(ntuple_version, tag),
             #"outputs/{}/{}/www.root".format(ntuple_version, tag),
@@ -121,11 +123,15 @@ def main_analysis_make_plot_userfilter():
     if "2016" in ntuple_version and "2017" in ntuple_version and "2018" in ntuple_version: lumi = 137
 
     p.dump_plot(fnames=bkgfilesfake if "PlusX" in filter_pattern else bkgfiles,
-            sig_fnames=[] if "PlusX" in filter_pattern else (onesigfiles if args.one_signal else sigfiles),
+            #KARRI ggZH tmp 
+            sig_fnames=[] if "PlusX" in filter_pattern else (onesigfiles if args.one_signal else sigfiles_detail),
+            #sig_fnames=[] if "PlusX" in filter_pattern else (onesigfiles if args.one_signal else sigfiles),
             data_fname="outputs/{}/{}/data.root".format(ntuple_version, tag) if unblind else None,
             usercolors=fakeVRcolors if "PlusX" in filter_pattern else colors,
             legend_labels=bkgnamesddfake if "PlusX" in filter_pattern else bkgnames,
-            signal_labels=["VVV"] if args.one_signal else ["WWZ", "WZZ", "ZZZ", "VVV"],
+            #KARRI ggZH tmp 
+            signal_labels=["noH_WWZ","ZH_WWZ","ggZH_WWZ","noH_WZZ","WH_WZZ","noH_ZZZ","ZH_ZZZ"], 
+            #signal_labels=["VVV"] if args.one_signal else ["WWZ", "WZZ", "ZZZ", "VVV"],
             dirname="plots/{}/{}/{}".format(ntuple_version, tag, dirname),
             filter_pattern=filter_pattern,
             dogrep=True,

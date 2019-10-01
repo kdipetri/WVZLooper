@@ -115,49 +115,49 @@ if [ ! -d /nfs-7/userdata/phchang/babies/${NTUPLETYPE}2018_${NTUPLEVERSION}/ ]; 
 # Run the jobs
 #
 #
-if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE} ]; then
-    echo "Running the looper..."
-    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2016 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2016_${BASELINE} &
-fi
-if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE} ]; then
-    echo "Running the looper..."
-    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2017 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2017_${BASELINE} &
-fi
-if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE} ]; then
-    echo "Running the looper..."
-    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2018 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2018_${BASELINE} &
-fi
-wait
+#if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE} ]; then
+#    echo "Running the looper..."
+#    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2016 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2016_${BASELINE} &
+#fi
+#if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE} ]; then
+#    echo "Running the looper..."
+#    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2017 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2017_${BASELINE} &
+#fi
+#if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE} ]; then
+#    echo "Running the looper..."
+#    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2018 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2018_${BASELINE} &
+#fi
+#wait
 
 #
 #
 # Hadding the histogram outputs by each year
 #
 #
-if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root ]; then
-    ls outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root
-    echo "Running the hadder..."
-    sh ./scripts/hadd.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
-fi
-if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root ]; then
-    ls outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root
-    echo "Running the hadder..."
-    sh ./scripts/hadd.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
-fi
-if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
-    ls outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root
-    echo "Running the hadder..."
-    sh ./scripts/hadd.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
-fi
-
+#if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root ]; then
+#    ls outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root
+#    echo "Running the hadder..."
+#    sh ./scripts/hadd.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+#fi
+#if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root ]; then
+#    ls outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root
+#    echo "Running the hadder..."
+#    sh ./scripts/hadd.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+#fi
+#if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
+#    ls outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root
+#    echo "Running the hadder..."
+#    sh ./scripts/hadd.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+#fi
 #
-#
-# Hadding the entire Run 2 into a single histograms (NOTE: Must be ran after each year has alreday been hadded)
-#
-#
-if ${FORCEHADDER} || [ ! -f outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION}/y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE}/sig.root ]; then
-    sh ./scripts/haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
-fi
+##
+##
+## Hadding the entire Run 2 into a single histograms (NOTE: Must be ran after each year has alreday been hadded)
+##
+##
+#if ${FORCEHADDER} || [ ! -f outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION}/y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE}/sig.root ]; then
+#    sh ./scripts/haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
+#fi
 
 if [ -n ${DIRNAME} ] && [ -n ${PATTERN} ]; then
 
@@ -169,25 +169,31 @@ if [ -n ${DIRNAME} ] && [ -n ${PATTERN} ]; then
     fi
 
     if ${RUNALLYEAR}; then
+	echo "Running plotting script for each year" 
         # Plotting the output histograms by each year
-        python ./scripts/plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2016_${NTUPLEVERSION} -t y2016_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # The last two arguments must match the last two arguments from previous command
-        python ./scripts/plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2017_${NTUPLEVERSION} -t y2017_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # The last two arguments must match the last two arguments from previous command
-        python ./scripts/plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2018_${NTUPLEVERSION} -t y2018_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # The last two arguments must match the last two arguments from previous command
+        python ./scripts/karri_plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2016_${NTUPLEVERSION} -t y2016_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # The last two arguments must match the last two arguments from previous command
+        python ./scripts/karri_plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2017_${NTUPLEVERSION} -t y2017_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # The last two arguments must match the last two arguments from previous command
+        python ./scripts/karri_plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2018_${NTUPLEVERSION} -t y2018_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # The last two arguments must match the last two arguments from previous command
     fi
 
     # Plotting the output histograms of all year
-    echo python ./scripts/plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION} -t y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # Basically the tags are just concatenated with "_"
-    python ./scripts/plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION} -t y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # Basically the tags are just concatenated with "_"
+    echo "Running plotting script for all years" 
+    echo python ./scripts/karri_plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION} -t y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # Basically the tags are just concatenated with "_"
+    python ./scripts/karri_plot.py ${STACKSIGNAL} ${ONESIGNAL} -r "${YAXISRANGE}" -x "${XAXISLABEL}" ${YAXISLOG} ${UNBLIND} -s ${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION} -t y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE} -d ${DIRNAME} -p ${PATTERN} ${NBINS} # Basically the tags are just concatenated with "_"
 
 fi
 
 if [[ ${PATTERN} == *"ChannelEMuHighMT__Yield,ChannelOffZHighMET__Yield,ChannelOnZ__Yield,ChannelBTagEMu__Yield"* ]] && [[ ${NTUPLETYPE} == *"WVZ"* ]]; then
 
     # pretty_print each year
-    sh ./scripts/yield_print.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} # Basically the tags are just concatenated with "_"
-    sh ./scripts/yield_print.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} # Basically the tags are just concatenated with "_"
-    sh ./scripts/yield_print.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} # Basically the tags are just concatenated with "_"
+    if ${RUNALLYEAR}; then
+    	echo "Pretty printing script for each year" 
+    	sh ./scripts/yield_print.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} # Basically the tags are just concatenated with "_"
+    	sh ./scripts/yield_print.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} # Basically the tags are just concatenated with "_"
+    	sh ./scripts/yield_print.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} # Basically the tags are just concatenated with "_"
+    fi
 
     # Printing in to text format for easy keynote export
+    echo "Printing for easy keynote export" 
     sh ./scripts/yield_print.sh ${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION} y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE} # Basically the tags are just concatenated with "_"
 fi
