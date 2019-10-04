@@ -284,11 +284,30 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
     //========================
 
     // Histogram object contains histogram definitions and the lambda to be used for histogram filling
+    RooUtil::Histograms histograms_zh;
     RooUtil::Histograms histograms;
     RooUtil::Histograms histograms_Z_peak;
 
     if (not ntupleVersion.Contains("Trilep"))
     {
+	// *
+	// Karri histograms for zh studies
+	// * 
+	//
+	// Z leptons pT sorted dists
+        histograms_zh.addHistogram("zh_lepZPt0"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_ZCand_idx1); });
+        histograms_zh.addHistogram("zh_lepZPt1"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_ZCand_idx2); });
+	// W leptons pT sorted dists
+        histograms_zh.addHistogram("zh_lepWPt0"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_Nom_idx1); });
+        histograms_zh.addHistogram("zh_lepWPt1"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_Nom_idx2); });
+	// event level hisgorams
+        histograms_zh.addHistogram("zh_MET"            , 180 , 0       , 400    , [&](){ return this->VarMET(); });
+        histograms_zh.addHistogram("zh_Njet"           , 6   , 0       , 6      , [&](){ return this->VarNjet(); });
+        histograms_zh.addHistogram("zh_Mjj"            , 180 , 0       , 300    , [&](){ return this->VarMjj(); });
+        histograms_zh.addHistogram("zh_MllZCand"       , 180 , 0       , 200    , [&](){ return this->VarMll(lep_ZCand_idx1, lep_ZCand_idx2); });
+        histograms_zh.addHistogram("zh_MllWW"          , 180 , 0       , 200    , [&](){ return this->VarMll(lep_Nom_idx1, lep_Nom_idx2); });
+	
+	// Philip histograms
         histograms.addHistogram("Mll"            , 180 , 0       , 300    , [&](){ return this->VarMll(); });
         histograms.addHistogram("MET"            , 180 , 0       , 300    , [&](){ return this->VarMET(); });
         histograms.addHistogram("OrigMET"        , 180 , 0       , 300    , [&](){ return wvz.met_pt(); });
@@ -698,9 +717,10 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
         if (not doSyst)
         {
 	
-	    cutflow.bookHistogramsForCutAndBelow(histograms, "Weight");
-	    cutflow.bookHistogramsForCutAndBelow(histograms, "FourLeptons");
-            cutflow.bookHistogramsForCutAndBelow(histograms, "Cut4LepLeptonPt");
+	    // Karri histograms start here... hopefully 
+	    cutflow.bookHistogramsForCutAndBelow(histograms_zh, "FourLeptons");
+	    //cutflow.bookHistogramsForCutAndBelow(histograms_zh, "FindZCandLeptons");
+
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelEMu");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelOnZ");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelOffZ");

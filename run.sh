@@ -63,11 +63,17 @@ echo " Will only show progress for ZZ to 4L sample. since that is the bottle nec
 
 rm -f .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
 for i in $(ls -r /nfs-7/userdata/phchang/babies/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/); do
-    if [[ $i == *"zz_4l_powheg"* ]]; then
-        echo ./Analysis.exe ${i} ${NTUPLETYPE}${YEAR}_${NTUPLEVERSION} ${TAG} ${SYST} ${SKIM}" | tee outputs/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/${TAG}/${SYST}${SKIM}${i}.log"  >> .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
-    else
+    # for karri test only run on two samples 
+    if [[ $i == *"zh_ww_4l_powheg_1"* ]] || [[ $i == *"ggzh_4l_powheg_1"* ]]; then
         echo ./Analysis.exe ${i} ${NTUPLETYPE}${YEAR}_${NTUPLEVERSION} ${TAG} ${SYST} ${SKIM}"> outputs/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/${TAG}/${SYST}${SKIM}${i}.log"  >> .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
-    fi
+    fi 
+
+    # normally run over everythign
+    #if [[ $i == *"zz_4l_powheg"* ]]; then
+    #    echo ./Analysis.exe ${i} ${NTUPLETYPE}${YEAR}_${NTUPLEVERSION} ${TAG} ${SYST} ${SKIM}" | tee outputs/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/${TAG}/${SYST}${SKIM}${i}.log"  >> .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
+    #else
+    #    echo ./Analysis.exe ${i} ${NTUPLETYPE}${YEAR}_${NTUPLEVERSION} ${TAG} ${SYST} ${SKIM}"> outputs/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/${TAG}/${SYST}${SKIM}${i}.log"  >> .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
+    #fi
 done
 
 mkdir -p outputs/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/${TAG}

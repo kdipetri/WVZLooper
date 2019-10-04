@@ -115,50 +115,50 @@ if [ ! -d /nfs-7/userdata/phchang/babies/${NTUPLETYPE}2018_${NTUPLEVERSION}/ ]; 
 # Run the jobs
 #
 #
-#if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE} ]; then
-#    echo "Running the looper..."
-#    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2016 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2016_${BASELINE} &
-#fi
-#if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE} ]; then
-#    echo "Running the looper..."
-#    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2017 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2017_${BASELINE} &
-#fi
-#if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE} ]; then
-#    echo "Running the looper..."
-#    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2018 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2018_${BASELINE} &
-#fi
-#wait
+if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE} ]; then
+    echo "Running the looper..."
+    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2016 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2016_${BASELINE} &
+fi
+if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE} ]; then
+    echo "Running the looper..."
+    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2017 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2017_${BASELINE} &
+fi
+if ${FORCELOOPER} || [ ! -d outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE} ]; then
+    echo "Running the looper..."
+    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2018 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2018_${BASELINE} &
+fi
+wait
+
 #
-##
-##
-## Hadding the histogram outputs by each year
-##
-##
-#if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root ]; then
-#    ls outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root
-#    echo "Running the hadder..."
-#    sh ./scripts/hadd.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
-#fi
-#if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root ]; then
-#    ls outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root
-#    echo "Running the hadder..."
-#    sh ./scripts/hadd.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
-#fi
-#if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
-#    ls outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root
-#    echo "Running the hadder..."
-#    sh ./scripts/hadd.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
-#fi
 #
-##
-##
-## Hadding the entire Run 2 into a single histograms (NOTE: Must be ran after each year has alreday been hadded)
-##
-##
-#if ${FORCEHADDER} || [ ! -f outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION}/y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE}/sig.root ]; then
-#    sh ./scripts/haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
-#fi
+# Hadding the histogram outputs by each year
 #
+#
+if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root ]; then
+    ls outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root
+    echo "Running the hadder..."
+    sh ./scripts/hadd.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+fi
+if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root ]; then
+    ls outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root
+    echo "Running the hadder..."
+    sh ./scripts/hadd.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+fi
+if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
+    ls outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root
+    echo "Running the hadder..."
+    sh ./scripts/hadd.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+fi
+
+#
+#
+# Hadding the entire Run 2 into a single histograms (NOTE: Must be ran after each year has alreday been hadded)
+#
+#
+if ${FORCEHADDER} || [ ! -f outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION}/y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE}/sig.root ]; then
+    sh ./scripts/haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
+fi
+
 if [ -n ${DIRNAME} ] && [ -n ${PATTERN} ]; then
 
     if [ ! -f outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
