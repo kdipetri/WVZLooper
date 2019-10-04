@@ -65,7 +65,7 @@ if [ -z ${NTUPLEVERSION}  ]; then usage; fi
 if [ -z ${FORCELOOPER}  ]; then FORCELOOPER=false; fi
 if [ -z ${FORCEHADDER}  ]; then FORCEHADDER=false; fi
 if [ -z ${DIRNAME}  ]; then DIRNAME="yield"; fi
-if [ -z ${PATTERN}  ]; then PATTERN="ChannelEMuHighMT__Yield,ChannelOffZHighMET__Yield,ChannelOnZ__Yield,ChannelBTagEMu__Yield,FiveLeptonsMT5th__Yield"; fi
+if [ -z ${PATTERN}  ]; then PATTERN="ChannelEMu__Yield,ChannelEMuHighMT__Yield,ChannelOffZ__Yield,ChannelOffZHighMET__Yield,ChannelOnZ__Yield,ChannelOnZNjet__Yield,ChannelBTagEMu__Yield"; fi
 if [ -z "${NBINS}" ]; then NBINS=""; fi
 if [ -z ${UNBLIND}  ]; then UNBLIND=""; fi
 if [ -z ${YAXISLOG}  ]; then YAXISLOG=""; fi
@@ -128,12 +128,12 @@ if [ ! -d /nfs-7/userdata/phchang/babies/${NTUPLETYPE}2018_${NTUPLEVERSION}/ ]; 
 #    sh ./run.sh ${DOSYST} ${DOSKIM} -y 2018 -t ${NTUPLETYPE} -v ${NTUPLEVERSION} -T y2018_${BASELINE} &
 #fi
 #wait
-
 #
-#
-# Hadding the histogram outputs by each year
-#
-#
+##
+##
+## Hadding the histogram outputs by each year
+##
+##
 #if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root ]; then
 #    ls outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root
 #    echo "Running the hadder..."
@@ -158,7 +158,7 @@ if [ ! -d /nfs-7/userdata/phchang/babies/${NTUPLETYPE}2018_${NTUPLEVERSION}/ ]; 
 #if ${FORCEHADDER} || [ ! -f outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION}/y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE}/sig.root ]; then
 #    sh ./scripts/haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
 #fi
-
+#
 if [ -n ${DIRNAME} ] && [ -n ${PATTERN} ]; then
 
     if [ ! -f outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
@@ -183,7 +183,7 @@ if [ -n ${DIRNAME} ] && [ -n ${PATTERN} ]; then
 
 fi
 
-if [[ ${PATTERN} == *"ChannelEMuHighMT__Yield,ChannelOffZHighMET__Yield,ChannelOnZ__Yield,ChannelBTagEMu__Yield"* ]] && [[ ${NTUPLETYPE} == *"WVZ"* ]]; then
+if [[ ${PATTERN} == *"ChannelEMu__Yield,ChannelEMuHighMT__Yield,ChannelOffZ__Yield,ChannelOffZHighMET__Yield,ChannelOnZ__Yield,ChannelOnZNjet__Yield,ChannelBTagEMu__Yield"* ]] && [[ ${NTUPLETYPE} == *"WVZ"* ]]; then
 
     # pretty_print each year
     if ${RUNALLYEAR}; then

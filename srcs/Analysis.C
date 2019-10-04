@@ -697,6 +697,10 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
     {
         if (not doSyst)
         {
+	
+	    cutflow.bookHistogramsForCutAndBelow(histograms, "Weight");
+	    cutflow.bookHistogramsForCutAndBelow(histograms, "FourLeptons");
+            cutflow.bookHistogramsForCutAndBelow(histograms, "Cut4LepLeptonPt");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelEMu");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelOnZ");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelOffZ");
@@ -738,7 +742,8 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
             histograms_Z_peak.addHistogram("lepVPt1"  , 180 , 0 , 200 , [&](){ return this->VarLepPt(lep_Veto_idx2); });
             histograms_Z_peak.addHistogram("lepVPt2"  , 180 , 0 , 200 , [&](){ return this->VarLepPt(lep_Veto_idx3); });
             histograms_Z_peak.addHistogram("lepVPt3"  , 180 , 0 , 200 , [&](){ return this->VarLepPt(lep_Veto_idx4); });
-            cutflow.bookHistogramsForCut(histograms_Z_peak, "Cut4LepLeptonPt");
+		// testing all histograms for Cut4LepLeptonPt
+            cutflow.bookHistogramsForCut(histograms, "Cut4LepLeptonPt");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelAREMu");
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelAROffZ");
         }

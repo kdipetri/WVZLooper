@@ -19,13 +19,20 @@ if [ ! -d plots/$1/$2 ]; then
     exit
 fi
 
-python rooutil/yield_for_keynote.py plots/$1/$2/yield/ChannelOffZHighMET__Yield.txt > offz.txt
-python rooutil/yield_for_keynote.py plots/$1/$2/yield/ChannelEMuHighMT__Yield.txt > emu.txt
-python rooutil/yield_for_keynote.py plots/$1/$2/yield/ChannelOnZ__Yield.txt > onz.txt
-python rooutil/yield_for_keynote.py plots/$1/$2/yield/ChannelBTagEMu__Yield.txt > btag.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelEMu__Yield.txt > emu.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelEMuHighMT__Yield.txt > emuhighmt.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelOffZ__Yield.txt > offz.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelOffZHighMET__Yield.txt > offzhighmet.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelOnZ__Yield.txt > onz.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelOnZNjet__Yield.txt > onznjet.txt
+python rooutil/yield_for_keynote.py karri_plots/$1/$2/yield/ChannelBTagEMu__Yield.txt > btag.txt
 
 ##head -n1 emu.txt > summary.txt
 tail -n2 emu.txt | head -n1 > summary_${1}_${2}.txt
+tail -n2 emuhighmt.txt | head -n1 > summary_${1}_${2}.txt
 tail -n2 offz.txt | head -n1 >> summary_${1}_${2}.txt
+tail -n2 offzhighmet.txt | head -n1 >> summary_${1}_${2}.txt
 tail -n2 onz.txt | head -n1 >> summary_${1}_${2}.txt
+tail -n2 onznjet.txt | head -n1 >> summary_${1}_${2}.txt
 tail -n2 btag.txt | head -n1 >> summary_${1}_${2}.txt
+
