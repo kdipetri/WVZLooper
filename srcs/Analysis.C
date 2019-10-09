@@ -285,7 +285,7 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
 
     // Histogram object contains histogram definitions and the lambda to be used for histogram filling
     RooUtil::Histograms histograms_zh;
-    RooUtil::Histograms histograms;
+    rooutil::histograms histograms;
     RooUtil::Histograms histograms_Z_peak;
 
     if (not ntupleVersion.Contains("Trilep"))
@@ -295,19 +295,33 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
 	// * 
 	//
 	// Z leptons pT sorted dists
-        histograms_zh.addHistogram("zh_lepZPt0"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_ZCand_idx1); });
-        histograms_zh.addHistogram("zh_lepZPt1"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_ZCand_idx2); });
+        histograms_zh.addHistogram("zh_lepZPt0"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_ZCand_idx1); });
+        histograms_zh.addHistogram("zh_lepZPt1"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_ZCand_idx2); });
 	// W leptons pT sorted dists
-        histograms_zh.addHistogram("zh_lepWPt0"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_Nom_idx1); });
-        histograms_zh.addHistogram("zh_lepWPt1"        , 180 , 0       , 200    , [&](){ return this->VarLepPt(lep_Nom_idx2); });
+        histograms_zh.addHistogram("zh_lepWPt0"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_Nom_idx1); });
+        histograms_zh.addHistogram("zh_lepWPt1"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_Nom_idx2); });
+        histograms_zh.addHistogram("zh_MTlepW0"        , 180 , 0       , 180    , [&](){ return this->VarMTNom0(); });
+        histograms_zh.addHistogram("zh_MTlepW1"        , 180 , 0       , 150    , [&](){ return this->VarMTNom1(); });
+	// jet histograms	
+        histograms_zh.addHistogram("zh_jetPt0"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 0 ? wvz.jets_p4()[0].pt() : -999; });
+        histograms_zh.addHistogram("zh_jetPt1"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 0 ? wvz.jets_p4()[0].pt() : -999; });
+        histograms_zh.addHistogram("zh_jetPt2"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 0 ? wvz.jets_p4()[0].pt() : -999; });
 	// event level hisgorams
         histograms_zh.addHistogram("zh_MET"            , 180 , 0       , 400    , [&](){ return this->VarMET(); });
         histograms_zh.addHistogram("zh_Njet"           , 6   , 0       , 6      , [&](){ return this->VarNjet(); });
-        histograms_zh.addHistogram("zh_Mjj"            , 180 , 0       , 300    , [&](){ return this->VarMjj(); });
+        histograms_zh.addHistogram("zh_Nbjet"          , 6   , 0       , 6      , [&](){ return this->VarNb(); });
+        histograms_zh.addHistogram("zh_Mjj"            , 180 , 0       , 700    , [&](){ return this->VarMjj(); });
         histograms_zh.addHistogram("zh_MllZCand"       , 180 , 0       , 200    , [&](){ return this->VarMll(lep_ZCand_idx1, lep_ZCand_idx2); });
+        histograms_zh.addHistogram("zh_PtZCand"        , 180 , 0       , 200    , [&](){ return this->VarMll(lep_ZCand_idx1, lep_ZCand_idx2); });
         histograms_zh.addHistogram("zh_MllWW"          , 180 , 0       , 200    , [&](){ return this->VarMll(lep_Nom_idx1, lep_Nom_idx2); });
+        histograms_zh.addHistogram("zh_M4l"            , 180 , 0       , 500    , [&](){ return this->VarM4l(lep_Z2Cand_idx1, lep_Z2Cand_idx2, lep_ZCand_idx1, lep_ZCand_idx2); });
+        histograms_zh.addHistogram("zh_HTHad"          , 180 , 0       , 500    , [&](){ return wvz.ht(); });
+        histograms_zh.addHistogram("zh_HTLep"          , 180 , 0       , 500    , [&](){ return this->VarHTLep(lep_Nom_idx1, lep_Nom_idx2, lep_ZCand_idx1, lep_ZCand_idx2); });
 	
+
+	//*
 	// Philip histograms
+	//*
         histograms.addHistogram("Mll"            , 180 , 0       , 300    , [&](){ return this->VarMll(); });
         histograms.addHistogram("MET"            , 180 , 0       , 300    , [&](){ return this->VarMET(); });
         histograms.addHistogram("OrigMET"        , 180 , 0       , 300    , [&](){ return wvz.met_pt(); });

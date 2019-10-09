@@ -64,7 +64,7 @@ echo " Will only show progress for ZZ to 4L sample. since that is the bottle nec
 rm -f .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
 for i in $(ls -r /nfs-7/userdata/phchang/babies/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/); do
     # for karri test only run on two samples 
-    if [[ $i == *"zh_ww_4l_powheg_1"* ]] || [[ $i == *"ggzh_4l_powheg_1"* ]]; then
+    if [[ $i == *"zh_ww_amcatnlo_1"* ]] || [[ $i == *"zh_ww_4l_powheg_1"* ]] || [[ $i == *"ggzh_4l_powheg_1"* ]]; then
         echo ./Analysis.exe ${i} ${NTUPLETYPE}${YEAR}_${NTUPLEVERSION} ${TAG} ${SYST} ${SKIM}"> outputs/${NTUPLETYPE}${YEAR}_${NTUPLEVERSION}/${TAG}/${SYST}${SKIM}${i}.log"  >> .jobs_${YEAR}_${NTUPLEVERSION}_${NTUPLETYPE}_${TAG}_${SYST}_${SKIM}.txt
     fi 
 

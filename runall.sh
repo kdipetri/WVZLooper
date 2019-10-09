@@ -137,17 +137,17 @@ wait
 if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root ]; then
     ls outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}/y2016_${BASELINE}/sig.root
     echo "Running the hadder..."
-    sh ./scripts/hadd.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+    sh ./scripts/karri_hadd.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
 fi
 if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root ]; then
     ls outputs/${NTUPLETYPE}2017_${NTUPLEVERSION}/y2017_${BASELINE}/sig.root
     echo "Running the hadder..."
-    sh ./scripts/hadd.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+    sh ./scripts/karri_hadd.sh ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
 fi
 if ${FORCEHADDER} || [ ! -e outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root ]; then
     ls outputs/${NTUPLETYPE}2018_${NTUPLEVERSION}/y2018_${BASELINE}/sig.root
     echo "Running the hadder..."
-    sh ./scripts/hadd.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
+    sh ./scripts/karri_hadd.sh ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE} ${DOSKIM} # The last two arguments must match the last two arguments from previous command
 fi
 
 #
@@ -156,7 +156,7 @@ fi
 #
 #
 if ${FORCEHADDER} || [ ! -f outputs/${NTUPLETYPE}2016_${NTUPLEVERSION}_${NTUPLETYPE}2017_${NTUPLEVERSION}_${NTUPLETYPE}2018_${NTUPLEVERSION}/y2016_${BASELINE}_y2017_${BASELINE}_y2018_${BASELINE}/sig.root ]; then
-    sh ./scripts/haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
+    sh ./scripts/karri_haddallyears.sh ${NTUPLETYPE}2016_${NTUPLEVERSION} y2016_${BASELINE} ${NTUPLETYPE}2017_${NTUPLEVERSION} y2017_${BASELINE} ${NTUPLETYPE}2018_${NTUPLEVERSION} y2018_${BASELINE}
 fi
 
 if [ -n ${DIRNAME} ] && [ -n ${PATTERN} ]; then

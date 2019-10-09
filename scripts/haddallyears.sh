@@ -49,6 +49,7 @@ if [[ $1 == *"WVZ"* ]] || [[ $1 == *"Trilep"* ]] || [[ $1 == *"TTZ"* ]]; then
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/www.root      outputs/${1}/${2}/www.root      outputs/${3}/${4}/www.root      outputs/${5}/${6}/www.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/wzz.root      outputs/${1}/${2}/wzz.root      outputs/${3}/${4}/wzz.root      outputs/${5}/${6}/wzz.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/zzz.root      outputs/${1}/${2}/zzz.root      outputs/${3}/${4}/zzz.root      outputs/${5}/${6}/zzz.root" >> .hadd.cmds.txt
+    echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/mad_zh_wwz.root   outputs/${1}/${2}/mad_zh_wwz.root   outputs/${3}/${4}/mad_zh_wwz.root   outputs/${5}/${6}/mad_zh_wwz.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/zh_wwz.root   outputs/${1}/${2}/zh_wwz.root   outputs/${3}/${4}/zh_wwz.root   outputs/${5}/${6}/zh_wwz.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/ggzh_wwz.root   outputs/${1}/${2}/ggzh_wwz.root   outputs/${3}/${4}/ggzh_wwz.root   outputs/${5}/${6}/ggzh_wwz.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/wh_www.root   outputs/${1}/${2}/wh_www.root   outputs/${3}/${4}/wh_www.root   outputs/${5}/${6}/wh_www.root" >> .hadd.cmds.txt

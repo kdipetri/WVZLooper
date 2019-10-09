@@ -18,7 +18,7 @@ def main_analysis_make_plot_userfilter():
     parser.add_argument('-t' , '--tag'             , dest='tag'             , help='Tag of the looper output'                                                                                         , required=True)
     parser.add_argument('-d' , '--dirname'         , dest='dirname'         , help='karri_plots/<sample_set_name>/<tag>/<dirname> for plot output'                                                          , required=True)
     parser.add_argument('-p' , '--filter_pattern'  , dest='filter_pattern'  , help='To filter out plot'                                                                                               , required=True)
-    parser.add_argument('-u' , '--unblind'         , dest='unblind'         , help='To unblind data'     , default=False, action='store_true'                                                                        )
+    parser.add_argument('-u' , '--unblind'         , dest='unblind'         , help='To unblind data'     , default=True, action='store_true'                                                                        )
     # parser.add_argument('-f' , '--fake_rate_study' , dest='fake_rate_study' , help='Use MC bkg grouping intended for fake rate study ', default=False, action='store_true'                                           )
     parser.add_argument('-n' , '--nbins'           , dest='nbins'           , help='# of bins'           , default=15                                                                                                )
     parser.add_argument('-y' , '--yaxis_log'       , dest='yaxis_log'       , help='yaxis log'           , default=False, action='store_true'                                                                        )
@@ -42,14 +42,22 @@ def main_analysis_make_plot_userfilter():
     unblind = args.unblind
 
     #KARRI ggZH tmp 
-    bkgfiles = []
-    bkgnames = []
-    sigfiles_detail = [
+    #bkgfiles = ["outputs/{}/{}/mad_zh_wwz.root".format(ntuple_version, tag)]
+    #bkgnames = [ "ZH_WWZ_mad" ]
+    #sigfiles_detail = [
+    #        #"outputs/{}/{}/nonh_wwz.root".format(ntuple_version, tag),
+    #        "outputs/{}/{}/zh_wwz.root".format(ntuple_version, tag),
+    #        "outputs/{}/{}/ggzh_wwz.root".format(ntuple_version, tag),
+    #        ]
+    #signames = [ "ZH_WWZ", "ggZH_WWZ" ]
+    bkgfiles = [
             #"outputs/{}/{}/nonh_wwz.root".format(ntuple_version, tag),
             "outputs/{}/{}/zh_wwz.root".format(ntuple_version, tag),
-	    "outputs/{}/{}/ggzh_wwz.root".format(ntuple_version, tag),
+            "outputs/{}/{}/ggzh_wwz.root".format(ntuple_version, tag),
             ]
-    signames = [ "ZH_WWZ", "ggZH_WWZ" ]
+    bkgnames = [ "Powheg ZH_WWZ", "Powheg ggZH_WWZ" ]
+    sigfiles_detail = []
+    signames = []
 
     colors = [2005, 2007, 2003, 2011, 920, 2012, 2011, 2002]
     #colors = [2001, 2005, 2007, 2003, 2011, 920, 2012, 2011, 2002]
@@ -62,14 +70,15 @@ def main_analysis_make_plot_userfilter():
     p.dump_plot(fnames=bkgfiles,
             #KARRI ggZH tmp 
             sig_fnames=sigfiles_detail,
-            data_fname=None,
+            data_fname="outputs/{}/{}/mad_zh_wwz.root".format(ntuple_version, tag),
+            #data_fname=None,
             usercolors=colors,
             legend_labels=bkgnames,
             signal_labels=signames, 
             dirname="karri_plots/{}/{}/{}".format(ntuple_version, tag, dirname),
             filter_pattern=filter_pattern,
             dogrep=True,
-	    donorm=False if "Yield" in filter_pattern else True, 
+	    #donorm=False if "Yield" in filter_pattern else True, 
             extraoptions={
                 "print_yield":True,
                 "nbins":int(args.nbins),
