@@ -301,10 +301,28 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
 	// Karri histograms for zh studies
 	// * 
 	//
-        histograms_zh.addHistogram("zh_lep1Eta"        , 180 , -3       , 3    , [&](){ return lep1Eta; });
-        histograms_zh.addHistogram("zh_lep2Eta"        , 180 , -3       , 3    , [&](){ return lep2Eta; });
-        histograms_zh.addHistogram("zh_lep3Eta"        , 180 , -3       , 3    , [&](){ return lep3Eta; });
-        histograms_zh.addHistogram("zh_lep4Eta"        , 180 , -3       , 3    , [&](){ return lep4Eta; });
+  //gen_ht_isLoaded = false;
+  //gen_V_p4_isLoaded = false;
+  //gen_V_pt_isLoaded = false;
+  //gen_V_eta_isLoaded = false;
+  //gen_V_phi_isLoaded = false;
+  //gen_V_mass_isLoaded = false;
+  //gen_V_id_isLoaded = false;
+  //gen_lep_id_isLoaded = false;
+        histograms_zh.addHistogram("zh_NLep"        , 180 , 0       , 10     , [&](){ return wvz.lep_eta().size(); });
+        histograms_zh.addHistogram("zh_LepPt0"      , 180 , 0       , 150    , [&](){ return wvz.lep_pt().size() > 0 ? wvz.lep_pt().at(0) : -999; });
+        histograms_zh.addHistogram("zh_LepPt1"      , 180 , 0       , 150    , [&](){ return wvz.lep_pt().size() > 1 ? wvz.lep_pt().at(1) : -999; });
+        histograms_zh.addHistogram("zh_LepPt2"      , 180 , 0       , 150    , [&](){ return wvz.lep_pt().size() > 2 ? wvz.lep_pt().at(2) : -999; });
+        histograms_zh.addHistogram("zh_LepPt3"      , 180 , 0       , 150    , [&](){ return wvz.lep_pt().size() > 3 ? wvz.lep_pt().at(3) : -999; });
+        histograms_zh.addHistogram("zh_LepEta0"     , 180 , -3      ,  3     , [&](){ return wvz.lep_eta().size() > 0 ? wvz.lep_eta().at(0) : -999; });
+        histograms_zh.addHistogram("zh_LepEta1"     , 180 , -3      ,  3     , [&](){ return wvz.lep_eta().size() > 1 ? wvz.lep_eta().at(1) : -999; });
+        histograms_zh.addHistogram("zh_LepEta2"     , 180 , -3      ,  3     , [&](){ return wvz.lep_eta().size() > 2 ? wvz.lep_eta().at(2) : -999; });
+        histograms_zh.addHistogram("zh_LepEta3"     , 180 , -3      ,  3     , [&](){ return wvz.lep_eta().size() > 3 ? wvz.lep_eta().at(3) : -999; });
+        histograms_zh.addHistogram("zh_LepPhi0"     , 180 , -3.5    ,  3.5   , [&](){ return wvz.lep_phi().size() > 0 ? wvz.lep_phi().at(0) : -999; });
+        histograms_zh.addHistogram("zh_LepPhi1"     , 180 , -3.5    ,  3.5   , [&](){ return wvz.lep_phi().size() > 1 ? wvz.lep_phi().at(1) : -999; });
+        histograms_zh.addHistogram("zh_LepPhi2"     , 180 , -3.5    ,  3.5   , [&](){ return wvz.lep_phi().size() > 2 ? wvz.lep_phi().at(2) : -999; });
+        histograms_zh.addHistogram("zh_LepPhi3"     , 180 , -3.5    ,  3.5   , [&](){ return wvz.lep_phi().size() > 3 ? wvz.lep_phi().at(3) : -999; });
+
 	// Z leptons pT sorted dists
         histograms_zh.addHistogram("zh_lepZPt0"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_ZCand_idx1); });
         histograms_zh.addHistogram("zh_lepZPt1"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_ZCand_idx2); });
@@ -323,8 +341,8 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
         histograms_zh.addHistogram("zh_MTlepW1"        , 180 , 0       , 150    , [&](){ return this->VarMTNom1(); });
 	// jet histograms	
         histograms_zh.addHistogram("zh_jetPt0"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 0 ? wvz.jets_p4()[0].pt() : -999; });
-        histograms_zh.addHistogram("zh_jetPt1"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 0 ? wvz.jets_p4()[0].pt() : -999; });
-        histograms_zh.addHistogram("zh_jetPt2"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 0 ? wvz.jets_p4()[0].pt() : -999; });
+        histograms_zh.addHistogram("zh_jetPt1"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 1 ? wvz.jets_p4()[1].pt() : -999; });
+        histograms_zh.addHistogram("zh_jetPt2"        , 180 , 0       , 150    , [&](){ return wvz.jets_p4().size() > 2 ? wvz.jets_p4()[2].pt() : -999; });
 	// event level hisgorams
         histograms_zh.addHistogram("zh_MET"            , 180 , 0       , 400    , [&](){ return this->VarMET(); });
         histograms_zh.addHistogram("zh_Njet"           , 6   , 0       , 6      , [&](){ return this->VarNjet(); });
@@ -752,6 +770,7 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
 	
 	    // Karri histograms start here... hopefully 
 	    cutflow.bookHistogramsForCutAndBelow(histograms_zh, "FourLeptons");
+	    cutflow.bookHistogramsForCut(histograms_zh, "Weight");
 	    //cutflow.bookHistogramsForCutAndBelow(histograms_zh, "FindZCandLeptons");
 
             cutflow.bookHistogramsForCutAndBelow(histograms, "ChannelEMu");
@@ -3175,7 +3194,34 @@ float Analysis::VarMll2ndZ()
 //______________________________________________________________________________________________
 float Analysis::VarMET(int var)
 {
-    if (wvz.isData())
+	//if (doNotApplyMETSmear) return 
+	//return VarMETNoSmearing(var);
+	return VarMETSmearing(var);
+}
+//______________________________________________________________________________________________
+float Analysis::VarMETNoSmearing(int var)
+{
+
+    if      (var == 0) return wvz.met_orig_pt();
+    else if (var == 1) return wvz.met_orig_pt();
+    else if (var == 2) return wvz.met_orig_pt();
+    else if (var == 3) return wvz.met_orig_pt();
+    else if (var == 4) return wvz.met_orig_pt();
+    else if (var ==-1) return wvz.met_orig_pt();
+    else if (var ==-2) return wvz.met_orig_pt();
+    else if (var ==-3) return wvz.met_orig_pt();
+    else if (var ==-4) return wvz.met_orig_pt();
+    RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETNoSmearing");
+    return -999;
+
+}
+
+//______________________________________________________________________________________________
+float Analysis::VarMETSmearing(int var)
+{
+
+    // Newer versions of ntuples aready have smearing applied
+    if (doNotApplyMETSmear)
     {
         if      (var == 0) return wvz.met_pt();
         else if (var == 1) return wvz.met_up_pt();
@@ -3186,29 +3232,72 @@ float Analysis::VarMET(int var)
         else if (var ==-2) return wvz.met_dn_pt();
         else if (var ==-3) return wvz.met_pt();
         else if (var ==-4) return wvz.met_pt();
-        RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMET");
+        RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETSmearing");
         return -999;
     }
-    else
+    else 
     {
-        if      (var == 0) return metobj_corrected.extras.met;
-        else if (var == 1) return metobj_corrected.extras.met_JECup;
-        else if (var == 2) return metobj_corrected.extras.met_JERup;
-        else if (var == 3) return metobj_corrected.extras.met_METup;
-        else if (var == 4) return metobj_corrected.extras.met_PUup;
-        else if (var ==-1) return metobj_corrected.extras.met_JECdn;
-        else if (var ==-2) return metobj_corrected.extras.met_JERdn;
-        else if (var ==-3) return metobj_corrected.extras.met_METdn;
-        else if (var ==-4) return metobj_corrected.extras.met_PUdn;
-        RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMET");
-        return -999;
-    }
+        // Older version had to be smeared
+
+        if (wvz.isData())
+        {
+            if      (var == 0) return wvz.met_pt();
+            else if (var == 1) return wvz.met_up_pt();
+            else if (var == 2) return wvz.met_pt();
+            else if (var == 3) return wvz.met_pt();
+            else if (var == 4) return wvz.met_pt();
+            else if (var ==-1) return wvz.met_pt();
+            else if (var ==-2) return wvz.met_dn_pt();
+            else if (var ==-3) return wvz.met_pt();
+            else if (var ==-4) return wvz.met_pt();
+            RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETSmearing");
+            return -999;
+        }
+        else
+        {
+            if      (var == 0) return metobj_corrected.extras.met;
+            else if (var == 1) return metobj_corrected.extras.met_JECup;
+            else if (var == 2) return metobj_corrected.extras.met_JERup;
+            else if (var == 3) return metobj_corrected.extras.met_METup;
+            else if (var == 4) return metobj_corrected.extras.met_PUup;
+            else if (var ==-1) return metobj_corrected.extras.met_JECdn;
+            else if (var ==-2) return metobj_corrected.extras.met_JERdn;
+            else if (var ==-3) return metobj_corrected.extras.met_METdn;
+            else if (var ==-4) return metobj_corrected.extras.met_PUdn;
+            RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETSmearing");
+            return -999;
+        }
+     }
 }
 
 //______________________________________________________________________________________________
 float Analysis::VarMETPhi(int var)
 {
-    if (wvz.isData())
+    return VarMETPhiSmearing(var);
+    //return VarMETPhiNoSmearing(var);
+}
+//______________________________________________________________________________________________
+float Analysis::VarMETPhiNoSmearing(int var)
+{
+    if      (var == 0) return wvz.met_phi();
+    else if (var == 1) return wvz.met_phi();
+    else if (var == 2) return wvz.met_phi();
+    else if (var == 3) return wvz.met_phi();
+    else if (var == 4) return wvz.met_phi();
+    else if (var ==-1) return wvz.met_phi();
+    else if (var ==-2) return wvz.met_phi();
+    else if (var ==-3) return wvz.met_phi();
+    else if (var ==-4) return wvz.met_phi();
+    RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETPhiNoSmearing");
+    return -999;
+}
+//______________________________________________________________________________________________
+
+float Analysis::VarMETPhiSmearing(int var)
+{
+
+    // The newer version has the met smearing already applied
+    if (doNotApplyMETSmear)
     {
         if      (var == 0) return wvz.met_phi();
         else if (var == 1) return wvz.met_up_phi();
@@ -3219,23 +3308,42 @@ float Analysis::VarMETPhi(int var)
         else if (var ==-2) return wvz.met_dn_phi();
         else if (var ==-3) return wvz.met_phi();
         else if (var ==-4) return wvz.met_phi();
-        RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETPhi");
+        RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETPhiSmearing");
         return -999;
     }
     else
     {
-        if      (var == 0) return metobj_corrected.extras.phi;
-        else if (var == 1) return metobj_corrected.extras.phi_JECup;
-        else if (var == 2) return metobj_corrected.extras.phi_JERup;
-        else if (var == 3) return metobj_corrected.extras.phi_METup;
-        else if (var == 4) return metobj_corrected.extras.phi_PUup;
-        else if (var ==-1) return metobj_corrected.extras.phi_JECdn;
-        else if (var ==-2) return metobj_corrected.extras.phi_JERdn;
-        else if (var ==-3) return metobj_corrected.extras.phi_METdn;
-        else if (var ==-4) return metobj_corrected.extras.phi_PUdn;
-        RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETPhi");
-        return -999;
-    }
+    // Older n-tuples still need met smearing applied
+         if (wvz.isData())
+         {
+             if      (var == 0) return wvz.met_phi();
+             else if (var == 1) return wvz.met_up_phi();
+             else if (var == 2) return wvz.met_phi();
+             else if (var == 3) return wvz.met_phi();
+             else if (var == 4) return wvz.met_phi();
+             else if (var ==-1) return wvz.met_phi();
+             else if (var ==-2) return wvz.met_dn_phi();
+             else if (var ==-3) return wvz.met_phi();
+             else if (var ==-4) return wvz.met_phi();
+             RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETPhiSmearing");
+             return -999;
+         }
+         else
+         {
+             if      (var == 0) return metobj_corrected.extras.phi;
+             else if (var == 1) return metobj_corrected.extras.phi_JECup;
+             else if (var == 2) return metobj_corrected.extras.phi_JERup;
+             else if (var == 3) return metobj_corrected.extras.phi_METup;
+             else if (var == 4) return metobj_corrected.extras.phi_PUup;
+             else if (var ==-1) return metobj_corrected.extras.phi_JECdn;
+             else if (var ==-2) return metobj_corrected.extras.phi_JERdn;
+             else if (var ==-3) return metobj_corrected.extras.phi_METdn;
+             else if (var ==-4) return metobj_corrected.extras.phi_PUdn;
+             RooUtil::error(TString::Format("Unrecognized variation value var = %d", var).Data(), "VarMETPhiSmearing");
+             return -999;
+         }
+
+     }
 }
 
 //______________________________________________________________________________________________

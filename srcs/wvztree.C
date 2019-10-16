@@ -207,6 +207,10 @@ void wvztree::Init(TTree *tree) {
   if (lep_isCutBasedIsoMediumPOG_branch) lep_isCutBasedIsoMediumPOG_branch->SetAddress(&lep_isCutBasedIsoMediumPOG_);
   lep_isCutBasedIsoTightPOG_branch = tree->GetBranch("lep_isCutBasedIsoTightPOG");
   if (lep_isCutBasedIsoTightPOG_branch) lep_isCutBasedIsoTightPOG_branch->SetAddress(&lep_isCutBasedIsoTightPOG_);
+  met_orig_pt_branch = tree->GetBranch("met_orig_pt");
+  if (met_orig_pt_branch) met_orig_pt_branch->SetAddress(&met_orig_pt_);
+  met_orig_phi_branch = tree->GetBranch("met_orig_phi");
+  if (met_orig_phi_branch) met_orig_phi_branch->SetAddress(&met_orig_phi_);
   met_pt_branch = tree->GetBranch("met_pt");
   if (met_pt_branch) met_pt_branch->SetAddress(&met_pt_);
   met_phi_branch = tree->GetBranch("met_phi");
@@ -393,6 +397,8 @@ void wvztree::GetEntry(unsigned int idx) {
   lep_isCutBasedIsoLoosePOG_isLoaded = false;
   lep_isCutBasedIsoMediumPOG_isLoaded = false;
   lep_isCutBasedIsoTightPOG_isLoaded = false;
+  met_orig_pt_isLoaded = false;
+  met_orig_phi_isLoaded = false;
   met_p4_isLoaded = false;
   met_pt_isLoaded = false;
   met_phi_isLoaded = false;
@@ -539,6 +545,8 @@ void wvztree::LoadAllBranches() {
   if (lep_isCutBasedIsoLoosePOG_branch != 0) lep_isCutBasedIsoLoosePOG();
   if (lep_isCutBasedIsoMediumPOG_branch != 0) lep_isCutBasedIsoMediumPOG();
   if (lep_isCutBasedIsoTightPOG_branch != 0) lep_isCutBasedIsoTightPOG();
+  if (met_orig_pt_branch != 0) met_orig_pt();
+  if (met_orig_phi_branch != 0) met_orig_phi();
   if (met_p4_branch != 0) met_p4();
   if (met_pt_branch != 0) met_pt();
   if (met_phi_branch != 0) met_phi();
@@ -1847,6 +1855,32 @@ const vector<int> &wvztree::lep_isCutBasedIsoTightPOG() {
   return *lep_isCutBasedIsoTightPOG_;
 }
 
+const float &wvztree::met_orig_pt() {
+  if (not met_orig_pt_isLoaded) {
+    if (met_orig_pt_branch != 0) {
+      met_orig_pt_branch->GetEntry(index);
+    } else {
+      printf("branch met_orig_pt_branch does not exist!\n");
+      exit(1);
+    }
+    met_orig_pt_isLoaded = true;
+  }
+  return met_orig_pt_;
+}
+
+const float &wvztree::met_orig_phi() {
+  if (not met_orig_phi_isLoaded) {
+    if (met_orig_phi_branch != 0) {
+      met_orig_phi_branch->GetEntry(index);
+    } else {
+      printf("branch met_orig_phi_branch does not exist!\n");
+      exit(1);
+    }
+    met_orig_phi_isLoaded = true;
+  }
+  return met_orig_phi_;
+}
+
 const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &wvztree::met_p4() {
   if (not met_p4_isLoaded) {
     if (met_p4_branch != 0) {
@@ -2552,6 +2586,8 @@ const vector<int> &lep_isCutBasedIsoVetoPOG() { return wvz.lep_isCutBasedIsoVeto
 const vector<int> &lep_isCutBasedIsoLoosePOG() { return wvz.lep_isCutBasedIsoLoosePOG(); }
 const vector<int> &lep_isCutBasedIsoMediumPOG() { return wvz.lep_isCutBasedIsoMediumPOG(); }
 const vector<int> &lep_isCutBasedIsoTightPOG() { return wvz.lep_isCutBasedIsoTightPOG(); }
+const float &met_orig_pt() { return wvz.met_orig_pt(); }
+const float &met_orig_phi() { return wvz.met_orig_phi(); }
 const ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<float> > &met_p4() { return wvz.met_p4(); }
 const float &met_pt() { return wvz.met_pt(); }
 const float &met_phi() { return wvz.met_phi(); }
