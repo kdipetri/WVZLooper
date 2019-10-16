@@ -133,6 +133,7 @@ public:
     bool doFakeEst;
     bool doSyst;
     bool doSkim;
+    bool doNotApplyMETSmear;
     std::vector<LV> leptons;
     std::vector<int> lep_veto_idxs;
     std::vector<int> lep_tight_idxs;
@@ -177,6 +178,11 @@ public:
     LV dilepNominal;
     TString output_tfile_name;
     int year;
+    // Karri Vars
+    float lep1Eta;
+    float lep2Eta;
+    float lep3Eta;
+    float lep4Eta;
 
     // Scale factors
     RooUtil::HistMap* histmap_2016_elec_reco_highpt_sf;
@@ -247,6 +253,7 @@ public:
     void loadScaleFactors();
 
     void readLeptons();
+    void basicLeptonEta();
 
     void selectVetoLeptons();
     void selectZCandLeptons();

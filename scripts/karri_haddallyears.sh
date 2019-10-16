@@ -44,6 +44,7 @@ if [[ $1 == *"WVZ"* ]] || [[ $1 == *"Trilep"* ]] || [[ $1 == *"TTZ"* ]]; then
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/zh_wwz.root   outputs/${1}/${2}/zh_wwz.root   outputs/${3}/${4}/zh_wwz.root   outputs/${5}/${6}/zh_wwz.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/ggzh_wwz.root   outputs/${1}/${2}/ggzh_wwz.root   outputs/${3}/${4}/ggzh_wwz.root   outputs/${5}/${6}/ggzh_wwz.root" >> .hadd.cmds.txt
     echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/mad_zh_wwz.root   outputs/${1}/${2}/mad_zh_wwz.root   outputs/${3}/${4}/mad_zh_wwz.root   outputs/${5}/${6}/mad_zh_wwz.root" >> .hadd.cmds.txt
+    echo "hadd -f outputs/${1}_${3}_${5}/${2}_${4}_${6}/karri_mad_zh_wwz.root   outputs/${1}/${2}/karri_mad_zh_wwz.root   outputs/${3}/${4}/karri_mad_zh_wwz.root   outputs/${5}/${6}/karri_mad_zh_wwz.root" >> .hadd.cmds.txt
 fi
 
 sh rooutil/xargs.sh .hadd.cmds.txt

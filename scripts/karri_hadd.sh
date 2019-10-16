@@ -39,6 +39,7 @@ fi
 echo "hadd -f ggzh_wwz.root ${PREFIX}ggzh_4l_powheg_1_results.root" >> .hadd.cmds.txt
 echo "hadd -f zh_wwz.root ${PREFIX}zh_ww_4l_powheg_1_results.root" >> .hadd.cmds.txt
 echo "hadd -f mad_zh_wwz.root ${PREFIX}zh_ww_amcatnlo_1_results.root" >> .hadd.cmds.txt
+echo "hadd -f karri_mad_zh_wwz.root ${PREFIX}karri_zh_ww_amcatnlo_1_results.root" >> .hadd.cmds.txt
 
 sh ../../../rooutil/xargs.sh .hadd.cmds.txt
 

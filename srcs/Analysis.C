@@ -65,6 +65,8 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
     //
     //========================
 
+
+
     if (ntupleVersion.Contains("WVZ"))
     {
         // List of common four lepton related selections
@@ -285,8 +287,13 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
 
     // Histogram object contains histogram definitions and the lambda to be used for histogram filling
     RooUtil::Histograms histograms_zh;
-    rooutil::histograms histograms;
+    RooUtil::Histograms histograms;
     RooUtil::Histograms histograms_Z_peak;
+
+    lep1Eta=-999;
+    lep2Eta=-999;
+    lep3Eta=-999;
+    lep4Eta=-999;
 
     if (not ntupleVersion.Contains("Trilep"))
     {
@@ -294,12 +301,24 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
 	// Karri histograms for zh studies
 	// * 
 	//
+        histograms_zh.addHistogram("zh_lep1Eta"        , 180 , -3       , 3    , [&](){ return lep1Eta; });
+        histograms_zh.addHistogram("zh_lep2Eta"        , 180 , -3       , 3    , [&](){ return lep2Eta; });
+        histograms_zh.addHistogram("zh_lep3Eta"        , 180 , -3       , 3    , [&](){ return lep3Eta; });
+        histograms_zh.addHistogram("zh_lep4Eta"        , 180 , -3       , 3    , [&](){ return lep4Eta; });
 	// Z leptons pT sorted dists
         histograms_zh.addHistogram("zh_lepZPt0"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_ZCand_idx1); });
         histograms_zh.addHistogram("zh_lepZPt1"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_ZCand_idx2); });
+        histograms_zh.addHistogram("zh_lepZEta0"       , 180 , -3      , 3      , [&](){ return lep_ZCand_idx1 >= 0 ? wvz.lep_eta()[lep_ZCand_idx1] : -999; });
+        histograms_zh.addHistogram("zh_lepZEta1"       , 180 , -3      , 3      , [&](){ return lep_ZCand_idx2 >= 0 ? wvz.lep_eta()[lep_ZCand_idx2] : -999; });
+        histograms_zh.addHistogram("zh_lepZIso0"       , 180 , 0       , 1.0    , [&](){ return lep_ZCand_idx1 >= 0 ? wvz.lep_relIso03EA()[lep_ZCand_idx1] : -999; });
+        histograms_zh.addHistogram("zh_lepZIso1"       , 180 , 0       , 1.0    , [&](){ return lep_ZCand_idx2 >= 0 ? wvz.lep_relIso03EA()[lep_ZCand_idx2] : -999; });
 	// W leptons pT sorted dists
         histograms_zh.addHistogram("zh_lepWPt0"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_Nom_idx1); });
         histograms_zh.addHistogram("zh_lepWPt1"        , 180 , 0       , 250    , [&](){ return this->VarLepPt(lep_Nom_idx2); });
+        histograms_zh.addHistogram("zh_lepWEta0"       , 180 , -3      , 3      , [&](){ return lep_Nom_idx1 >= 0 ? wvz.lep_eta()[lep_Nom_idx1] : -999; });
+        histograms_zh.addHistogram("zh_lepWEta1"       , 180 , -3      , 3      , [&](){ return lep_Nom_idx2 >= 0 ? wvz.lep_eta()[lep_Nom_idx2] : -999; });
+        histograms_zh.addHistogram("zh_lepWIso0"       , 180 , 0       , 1.0    , [&](){ return lep_Nom_idx1 >= 0 ? wvz.lep_relIso03EA()[lep_ZCand_idx1] : -999; });
+        histograms_zh.addHistogram("zh_lepWIso1"       , 180 , 0       , 1.0    , [&](){ return lep_Nom_idx2 >= 0 ? wvz.lep_relIso03EA()[lep_ZCand_idx2] : -999; });
         histograms_zh.addHistogram("zh_MTlepW0"        , 180 , 0       , 180    , [&](){ return this->VarMTNom0(); });
         histograms_zh.addHistogram("zh_MTlepW1"        , 180 , 0       , 150    , [&](){ return this->VarMTNom1(); });
 	// jet histograms	
@@ -311,7 +330,7 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
         histograms_zh.addHistogram("zh_Njet"           , 6   , 0       , 6      , [&](){ return this->VarNjet(); });
         histograms_zh.addHistogram("zh_Nbjet"          , 6   , 0       , 6      , [&](){ return this->VarNb(); });
         histograms_zh.addHistogram("zh_Mjj"            , 180 , 0       , 700    , [&](){ return this->VarMjj(); });
-        histograms_zh.addHistogram("zh_MllZCand"       , 180 , 0       , 200    , [&](){ return this->VarMll(lep_ZCand_idx1, lep_ZCand_idx2); });
+        histograms_zh.addHistogram("zh_MllZCand"       , 180 , 50      , 150    , [&](){ return this->VarMll(lep_ZCand_idx1, lep_ZCand_idx2); });
         histograms_zh.addHistogram("zh_PtZCand"        , 180 , 0       , 200    , [&](){ return this->VarMll(lep_ZCand_idx1, lep_ZCand_idx2); });
         histograms_zh.addHistogram("zh_MllWW"          , 180 , 0       , 200    , [&](){ return this->VarMll(lep_Nom_idx1, lep_Nom_idx2); });
         histograms_zh.addHistogram("zh_M4l"            , 180 , 0       , 500    , [&](){ return this->VarM4l(lep_Z2Cand_idx1, lep_Z2Cand_idx2, lep_ZCand_idx1, lep_ZCand_idx2); });
@@ -828,6 +847,7 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
         // Load the entry
         fTTree->GetEntry(ii, 0);
         readLeptons();
+        basicLeptonEta();
         selectVetoLeptons();
         selectZCandLeptons();
         selectNominalLeptons();
@@ -837,7 +857,8 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
         select5LepLeptons();
         /* probably not necessary anymore */ sortLeptonIndex();
         selectFakeStudyLeptons();
-        correctMET();
+	doNotApplyMETSmear = looper->getCurrentFileName().Contains("WVZMVA") and (looper->getCurrentFileName().Contains("v0.1.15") or looper->getCurrentFileName().Contains("v0.1.20") or looper->getCurrentFileName().Contains("karri") );
+        if (not doNotApplyMETSmear) correctMET();
         cutflow.fill();
 
         if (ntupleVersion.Contains("WVZ"))
@@ -1040,6 +1061,17 @@ void Analysis::readLeptons()
     leptons.clear();
     for (unsigned int jj = 0 ; jj < lep_pt->size(); jj++)
         leptons.push_back(wvz.lep_p4().at(jj));
+}
+
+//______________________________________________________________________________________________
+void Analysis::basicLeptonEta()
+{
+    
+    
+     lep1Eta = leptons.at(0).Eta();
+     lep2Eta = leptons.at(1).Eta();
+     lep3Eta = leptons.at(2).Eta();
+     lep4Eta = leptons.at(3).Eta();
 }
 
 // Object selection algorithms

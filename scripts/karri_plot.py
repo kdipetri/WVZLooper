@@ -56,8 +56,8 @@ def main_analysis_make_plot_userfilter():
             "outputs/{}/{}/ggzh_wwz.root".format(ntuple_version, tag),
             ]
     bkgnames = [ "Powheg ZH_WWZ", "Powheg ggZH_WWZ" ]
-    sigfiles_detail = []
-    signames = []
+    sigfiles_detail = ["outputs/{}/{}/mad_zh_wwz.root".format(ntuple_version, tag)]
+    signames = ["Madgraph ZH_WWZ" ]
 
     colors = [2005, 2007, 2003, 2011, 920, 2012, 2011, 2002]
     #colors = [2001, 2005, 2007, 2003, 2011, 920, 2012, 2011, 2002]
@@ -70,7 +70,7 @@ def main_analysis_make_plot_userfilter():
     p.dump_plot(fnames=bkgfiles,
             #KARRI ggZH tmp 
             sig_fnames=sigfiles_detail,
-            data_fname="outputs/{}/{}/mad_zh_wwz.root".format(ntuple_version, tag),
+            data_fname="outputs/{}/{}/karri_mad_zh_wwz.root".format(ntuple_version, tag),
             #data_fname=None,
             usercolors=colors,
             legend_labels=bkgnames,
