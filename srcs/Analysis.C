@@ -857,8 +857,9 @@ void Analysis::Loop(const char* NtupleVersion, const char* TagName, bool dosyst,
         select5LepLeptons();
         /* probably not necessary anymore */ sortLeptonIndex();
         selectFakeStudyLeptons();
-	doNotApplyMETSmear = looper->getCurrentFileName().Contains("WVZMVA") and (looper->getCurrentFileName().Contains("v0.1.15") or looper->getCurrentFileName().Contains("v0.1.20") or looper->getCurrentFileName().Contains("karri") );
+	doNotApplyMETSmear = looper->getCurrentFileName().Contains("ggzh_4l_powheg") or looper->getCurrentFileName().Contains("zh_ww_4l_powheg")  or looper->getCurrentFileName().Contains("karri") ;
         if (not doNotApplyMETSmear) correctMET();
+        if (doNotApplyMETSmear) std::cout << " KARRI NTUPS NOT CORRECTING MET" << std::endl; 
         cutflow.fill();
 
         if (ntupleVersion.Contains("WVZ"))
